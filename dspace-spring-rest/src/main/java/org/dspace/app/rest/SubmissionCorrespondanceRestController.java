@@ -123,6 +123,8 @@ public class SubmissionCorrespondanceRestController implements InitializingBean 
         bitstreamService.addMetadata(context, bitMessage, "dc", "title", null, null, subject);
         bitstreamService.addMetadata(context, bitMessage, "dc", "creator", null, null,
             context.getCurrentUser().getFullName() + " <" + context.getCurrentUser().getEmail() + ">");
+        bitstreamService.addMetadata(context, bitMessage, "bitstream", "submitter", null, null,
+        	context.getCurrentUser().getID().toString());
         bitstreamService
             .addMetadata(context, bitMessage, "dc", "date", "issued", null, new DCDate(new Date()).toString());
 

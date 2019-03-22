@@ -40,12 +40,14 @@ public class WorkspaceitemSolrServiceIndexPlugin implements SolrServiceIndexPlug
 	private static final String SOLR_FIELD_NAME_FOR_REJECTED = "rejected";
 	private static final String SOLR_FIELD_NAME_FOR_REJECTED_DATE = "rejecteddate";
 	private static final String SOLR_FIELD_NAME_FOR_REJECTED_USER = "rejecteduser";
+	private static final String SOLR_FIELD_NAME_FOR_REJECTED_USER_UUID = "rejecteduseruuid";
 	private static final String SOLR_FIELD_NAME_FOR_REJECTED_REASON = "rejectedreason";
 	
 	private static final String BUNDLE_NAME = "MESSAGE";
 	private static final String BITSTREAM_SUBMISSION_REJECTED = "Submission Rejected";
 	private static final String BITSTREAM_DATE_ISSUED = "dc.date.issued";
 	private static final String BITSTREAM_CREATOR = "dc.creator";
+	private static final String BITSTREAM_SUBMITTER = "bitstream.submitter";
  
 	/** log4j logger */
     @Transient
@@ -98,6 +100,11 @@ public class WorkspaceitemSolrServiceIndexPlugin implements SolrServiceIndexPlug
 	                                		+ bitstream.getMetadata(BITSTREAM_CREATOR));
 	                                document.addField(SOLR_FIELD_NAME_FOR_REJECTED_USER, 
 	                                		bitstream.getMetadata(BITSTREAM_CREATOR));
+
+	                                log.debug("Adding field: " + SOLR_FIELD_NAME_FOR_REJECTED_USER_UUID + ": "
+	                                		+ bitstream.getMetadata(BITSTREAM_SUBMITTER));
+	                                document.addField(SOLR_FIELD_NAME_FOR_REJECTED_USER_UUID, 
+	                                		bitstream.getMetadata(BITSTREAM_SUBMITTER));
 	                                
 	                                String content = retrieveBitstreamContent(context, bitstream);
 	                                log.debug("Adding field: " + SOLR_FIELD_NAME_FOR_REJECTED_REASON + ": "

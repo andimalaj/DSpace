@@ -44,6 +44,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SolrServiceResourceRestrictionPlugin implements SolrServiceIndexPlugin, SolrServiceSearchPlugin {
 
     private static final Logger log = Logger.getLogger(SolrServiceResourceRestrictionPlugin.class);
+    private static final String SOLR_FIELD_NAME_FOR_REJECTED_USER = "rejecteduseruuid";
 
     @Autowired(required = true)
     protected AuthorizeService authorizeService;
@@ -112,7 +113,10 @@ public class SolrServiceResourceRestrictionPlugin implements SolrServiceIndexPlu
                                 }
                             }
                             controllerQuery.append(")");
+                            String creatorQuery = " OR " + SOLR_FIELD_NAME_FOR_REJECTED_USER + ":\"" + currentUser.getID().toString() + "\"";
+                            controllerQuery.append(creatorQuery);
                             solrQuery.addFilterQuery(controllerQuery.toString());
+
                             isInProgessSubmission = true;
                         }
                     }

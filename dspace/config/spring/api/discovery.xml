@@ -1927,7 +1927,7 @@
 		<property name="defaultFilterQueries">
 			<list>
 				<!--Only find items, communities and collections -->
-				<value>search.resourcetype:[10 TO 11]</value>
+				<value>search.resourcetype:8 OR search.resourcetype:[10 TO 11]</value>
 			</list>
 		</property>
         <!-- When true a "did you mean" example will be displayed, value can be true or false -->
